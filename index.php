@@ -130,3 +130,70 @@ echo 'Array without even elements: <pre>';
 print_r($array);
 echo '</pre>';
 ?>
+<h1>--------------------------------3.--------------------------------</h1>
+<p>Sugeneruokite masyvą, kurio reikšmės atsitiktinės raidės A, B, C ir D, o ilgis
+200. Suskaičiuokite kiek yra kiekvienos raidės.</p>
+<?php
+$array2 = [];
+$letters = ['A', 'B', 'C', 'D'];
+for ($i = 0; $i < 200; $i++) {
+    $random = rand(0, 3);
+    array_push($array2, $letters[$random]);
+}
+echo 'Letter count: <pre>';
+print_r($array2);
+print_r(array_count_values($array2));
+echo '</pre>';
+?>
+<h1>--------------------------------4.--------------------------------</h1>
+<p>Išrūšiuokite 3 uždavinio masyvą pagal abecėlę.</p>
+<?php
+$sortCountArray2 = array_count_values($array2);
+sort($array2);
+echo '<pre>';
+print_r($array2);
+print_r($sortCountArray2);
+echo '</pre>';
+?>
+<h1>--------------------------------5.--------------------------------</h1>
+<p>Sugeneruokite 3 masyvus pagal 3 uždavinio sąlygą. Sudėkite masyvus, sudėdami atitinkamas reikšmes. Paskaičiuokite kiek unikalių reikšmių kombinacijų gavote.</p>
+<?php
+$array3 = [];
+$array4 = [];
+$array5 = [];
+$letters = ['A', 'B', 'C', 'D'];
+$mergedArray = [];
+for ($i = 0; $i < 3; $i++) {
+    for ($j = 0; $j < 200; $j++) {
+        $random = rand(0, 3);
+        if ($i === 0) {
+            array_push($array3, $letters[$random]);
+        } else if ($i === 1) {
+            array_push($array4, $letters[$random]);
+        } else {
+            array_push($array5, $letters[$random]);
+        }
+    }
+}
+$mergedArray = [];
+for ($i = 0; $i < 200; $i++) {
+    $temp = $array3[$i] . $array4[$i] . $array5[$i];
+    array_push($mergedArray, $temp);
+}
+$combinations = array_count_values($mergedArray);
+$unicCombinations = 0;
+$unicCombinationsArray = [];
+foreach ($combinations as $letters => $value) {
+    if ($value === 1) {
+        $unicCombinations++;
+        array_push($unicCombinationsArray, $letters);
+    }
+}
+echo 'Merged array: <pre>';
+print_r($mergedArray);
+echo '</pre> All combinations array: <pre>';
+print_r(array_count_values($mergedArray));
+echo '</pre> Unic combinations array: <pre>';
+print_r($unicCombinationsArray);
+echo "</pre> There are $unicCombinations unic combinations in this array.";
+?>
