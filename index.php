@@ -197,3 +197,51 @@ echo '</pre> Unic combinations array: <pre>';
 print_r($unicCombinationsArray);
 echo "</pre> There are $unicCombinations unic combinations in this array.";
 ?>
+<h1>--------------------------------6.--------------------------------</h1>
+<p>Sugeneruokite du masyvus, kurių reikšmės yra atsitiktiniai skaičiai nuo 100 iki 999 Masyvų ilgiai 100. Masyvų reikšmės turi būti unikalios savo masyve (t.y. neturi kartotis </p>
+<?php
+$randomNumber = rand(100, 999);
+$arrayOne = [];
+$arrayTwo = [];
+for ($i = 0; $i < 2; $i++) {
+    for ($j = 0; $j < 100; $j++) {
+        $random = rand(100, 999);
+        if ($i === 0 && !in_array($random, $arrayOne)) {
+            array_push($arrayOne, $random);
+        } else if (!in_array($random, $arrayTwo)) {
+            array_push($arrayTwo, $random);
+        }
+    }
+}
+echo '<pre>';
+print_r($arrayOne);
+print_r($arrayTwo);
+echo '</pre>'; 
+?>
+<h1>--------------------------------7.--------------------------------</h1>
+<p>Sugeneruokite masyvą, kuris būtų sudarytas iš reikšmių, kurios yra pirmame 6 uždavinio masyve, bet nėra antrame 6 uždavinio masyve.</p>
+<?php
+$notRecurArray = array_diff($arrayOne, $arrayTwo);
+echo '<pre>';
+print_r($notRecurArray);
+echo '</pre>';
+?>
+<h1>--------------------------------8.--------------------------------</h1>
+<p>Sugeneruokite masyvą iš elementų, kurie kartojasi abiejuose 6 uždavinio
+masyvuose</p>
+<?php
+$repetitiveArray = array_intersect($arrayOne, $arrayTwo);
+echo '<pre>';
+print_r($repetitiveArray);
+echo '</pre>';
+?>
+<h1>--------------------------------9.--------------------------------</h1>
+<p>Sugeneruokite masyvą, kurio indeksus sudarytų pirmo 6 uždavinio masyvo reikšmės, o jo reikšmės iš būtų antrojo masyvo.</p>
+<?php
+$arrayOneSlice = array_slice($arrayOne, 0, 6, true);
+$arrayTwoSlice = array_slice($arrayTwo, 0, 6, true);
+$arrayBoth = array_combine($arrayOneSlice, $arrayTwoSlice);
+echo '<pre>';
+print_r($arrayBoth);
+echo '</pre>';
+?>
